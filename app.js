@@ -29,7 +29,7 @@ function formatTime(seconds) {
 
 //GET CPU info
 const getCpuInfo = () => {
-  const model = os.cpus()[0].model;
+  const model = os.cpus()[0].model.trim();
   const cores = os.cpus().length;
   const architecture = os.arch();
   const loadAvg = os.loadavg();
@@ -109,7 +109,15 @@ const server = http.createServer((req, res) => {
       JSON.stringify({
         name: "SysView-System Info Api",
         description: "Access system stats via simple JSON Routes",
-        routes: ["/cpu", "/memory", "/user", "/process", "/network", "/os"],
+        routes: [
+          "/cpu",
+          "/memory",
+          "/user",
+          "/process",
+          "/network",
+          "/os",
+          "/all",
+        ],
       })
     );
   } else if (parsedUrl.pathname === "/cpu") {
@@ -124,6 +132,16 @@ const server = http.createServer((req, res) => {
     res.end(JSON.stringify(getNetworkInfo(), null, 2));
   } else if (parsedUrl.pathname === "/os") {
     res.end(JSON.stringify(getOsInfo(), null, 2));
+  } else if (parsedUrl.pathname === "/all") {
+   const all ={
+    "cpu ":getCpuInfo(),
+    "memory ":getMemoryInfo(),
+    "user ":getUserInfo(),
+    "process ":getProcessInfo(),
+    "network ":getNetworkInfo(),
+    "os ":getOsInfo(),
+   }
+    res.end(JSON.stringify(all, null, 2));
   } else {
     res.statusCode = 404;
     res.end(
