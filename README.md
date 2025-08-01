@@ -8,4 +8,5 @@ A lightweight Node.js API that provides real-time system information using the b
 | `/process` | Get current process info (PID, memory, etc) |
 | `/network` | Get all network interfaces & IPs            |
 | `/os`      | Get OS type, platform, and uptime           |
+| `/all`     | Get All data                                |
 
