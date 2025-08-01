@@ -1,6 +1,5 @@
 🖥️ System Info API
 A lightweight Node.js API that provides real-time system information using the built-in Node.js core modules (os, process, http).
-
 | Route      | Description                                 |
 | ---------- | ------------------------------------------- |
 | `/cpu`     | Get CPU architecture, model, and core info  |
